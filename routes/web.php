@@ -19,6 +19,7 @@ Route::get('/', function () {
     return view('landingpage.home');
 });
 
+Route::redirect('/dashboard', '/dashboard/explore');
 Route::get('/{site:slug}', [SiteController::class, 'show']);
 
 Route::middleware([
