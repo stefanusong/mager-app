@@ -55,9 +55,12 @@ class SiteController extends Controller
     public function show($slug)
     {
         $site = Site::with('theme')->where('slug', $slug)->first();
-        if (!$site || !$site->is_public) {
+        if (!$site) {
             return abort(404);
+        } else if (!$site->is_public) {
+            return abort(403);
         }
+
         return view('templates.' . $site->theme->slug)->with(['site' => $site]);
     }
 
