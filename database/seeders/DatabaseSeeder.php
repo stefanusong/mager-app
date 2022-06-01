@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class DatabaseSeeder extends Seeder
 {
@@ -20,5 +21,12 @@ class DatabaseSeeder extends Seeder
         //     'name' => 'Test User',
         //     'email' => 'test@example.com',
         // ]);
+
+        DB::table('themes')->insert([
+            'slug' => 'blackwhite',
+            'name' => 'Black & White',
+            'description' => 'A minimalist company profile landing page that uses a black and white color scheme.',
+            'price' => 20000,
+        ]);
     }
 }

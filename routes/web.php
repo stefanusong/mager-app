@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use \App\Models\Theme;
+use \App\Http\Controllers\SiteController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,5 +16,26 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('landingpage.home');
+});
+
+Route::middleware([
+    'auth:sanctum',
+    config('jetstream.auth_session'),
+    'verified'
+])->prefix('dashboard')->group(function () {
+    Route::redirect('/', '/dashboard/explore');
+
+    Route::get('/explore', function () {
+        return view('dashboard')->with(['themes' => Theme::all()]);
+    })->name('dashboard');
+
+    Route::resource('/sites', SiteController::class);
+
+    Route::get('/preview/{theme:slug}', function (Theme $theme) {
+        if (!$theme) {
+            return abort(404);
+        }
+        return view('templates.' . $theme->slug);
+    });
 });
