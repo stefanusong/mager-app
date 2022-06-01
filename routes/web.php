@@ -19,6 +19,8 @@ Route::get('/', function () {
     return view('landingpage.home');
 });
 
+Route::get('/{site:slug}', [SiteController::class, 'show']);
+
 Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),
@@ -30,7 +32,9 @@ Route::middleware([
         return view('dashboard')->with(['themes' => Theme::all()]);
     })->name('dashboard');
 
-    Route::resource('/sites', SiteController::class);
+    Route::resource('/sites', SiteController::class)->except([
+        'show'
+    ]);
 
     Route::get('/preview/{theme:slug}', function (Theme $theme) {
         if (!$theme) {

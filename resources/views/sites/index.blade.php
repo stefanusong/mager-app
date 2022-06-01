@@ -63,7 +63,7 @@
                                     class="w-1/2 px-4 py-2 text-center text-blue-400 border-0 rounded-lg text-grey-500 bg-white hover:text-blue-500 transition-all duration-300 ease-in-out">
                                     Edit
                                 </a>
-                                <a href="/dashboard/sites/{{ $site->slug }}" target="_blank"
+                                <a href="/{{ $site->slug }}" target="_blank"
                                     class="w-1/2 text-center border-0 bg-gradient-to-r from-blue-400 to-blue-500 font-bold px-4 py-2 text-white rounded-lg hover:opacity-80 transition-all duration-500 ease-in-out">
                                     Visit Site
                                 </a>
